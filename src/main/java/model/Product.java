@@ -1,19 +1,18 @@
 package model;
 
 public class Product {
-    private int id;
-    private String name;
-    private String description;
-    private String photo;
-    private double price;
-    private double discount;
-
-    private Category category;
+    private int id; // ID sản phẩm
+    private String name; // Tên sản phẩm
+    private String description; // Mô tả sản phẩm
+    private String photo; // URL ảnh sản phẩm (ánh xạ từ cột `photo`)
+    private double price; // Giá sản phẩm
+    private double discount; // Giảm giá
+    private Category category; // Đối tượng Category ánh xạ từ category_id
 
     public Product() {
     }
 
-    public Product(int id, String name, String description, String photo, double price, double discount, int quantity, Category category) {
+    public Product(int id, String name, String description, String photo, double price, double discount, Category category) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -21,11 +20,9 @@ public class Product {
         this.price = price;
         this.discount = discount;
         this.category = category;
-
     }
 
-    // Getters and Setters
-
+    // Getters và Setters
     public int getId() {
         return id;
     }
@@ -74,8 +71,8 @@ public class Product {
         this.discount = discount;
     }
 
-    public Category getCategory(){
-            return category;
+    public Category getCategory() {
+        return category;
     }
 
     public void setCategory(Category category) {

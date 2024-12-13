@@ -32,19 +32,30 @@ CREATE TABLE Product (
 );
 
 CREATE TABLE Cart (
-    cart_id INT PRIMARY KEY IDENTITY(1,1),
-    user_id INT NOT NULL
+    id INT IDENTITY(1,1) PRIMARY KEY, -- ID tự động tăng cho Cart
+    user_id INT NOT NULL,             -- ID của người dùng
+    created_at DATETIME DEFAULT GETDATE(), -- Thời gian tạo giỏ hàng
+    updated_at DATETIME DEFAULT GETDATE()  -- Thời gian cập nhật giỏ hàng
 );
 
-CREATE TABLE cart_item (
-    cart_item_id INT PRIMARY KEY IDENTITY(1,1),
-    cart_id INT NOT NULL,
-    product_id INT NOT NULL,
-    quantity INT NOT NULL,
-    FOREIGN KEY (cart_id) REFERENCES cart(cart_id),
-    FOREIGN KEY (product_id) REFERENCES product(id)
+CREATE TABLE CartItem (
+    id INT IDENTITY(1,1) PRIMARY KEY,  -- ID tự động tăng cho CartItem
+    cart_id INT NOT NULL,              -- Liên kết đến giỏ hàng
+    product_id INT NOT NULL,           -- Liên kết đến sản phẩm
+    quantity INT NOT NULL CHECK (quantity > 0), -- Số lượng sản phẩm (không được âm hoặc 0)
+    price DECIMAL(10, 2) NOT NULL,     -- Giá sản phẩm
+    discount DECIMAL(5, 2) DEFAULT 0,  -- Phần trăm giảm giá
+    created_at DATETIME DEFAULT GETDATE(), -- Thời gian thêm mục vào giỏ hàng
+    updated_at DATETIME DEFAULT GETDATE()  -- Thời gian cập nhật mục trong giỏ hàng
 );
 
+-- Thiết lập liên kết khoá ngoại
+ALTER TABLE CartItem ADD CONSTRAINT FK_CartItem_Cart FOREIGN KEY (cart_id) REFERENCES Cart(id) ON DELETE CASCADE;
+ALTER TABLE CartItem ADD CONSTRAINT FK_CartItem_Product FOREIGN KEY (product_id) REFERENCES Product(id) ON DELETE CASCADE;
+
+SELECT * FROM CartItem
+
+SELECT * FROM ListUser
 
 CREATE TABLE [dbo].[ListUser] (
     [id] INT IDENTITY(1,1) NOT NULL,                    -- Tự động tăng ID

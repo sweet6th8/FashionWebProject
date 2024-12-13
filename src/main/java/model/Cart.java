@@ -4,12 +4,32 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Cart {
+    private int cartId;  // ID giỏ hàng
     private int userId;  // ID của người dùng sở hữu giỏ hàng này
     private Map<Integer, CartItem> items;  // Sử dụng Map với productId làm key và CartItem làm value
 
-    public Cart(int userId) {
+    public Cart(int cartId, int userId) {
+        this.cartId = cartId;
         this.userId = userId;
         this.items = new HashMap<>();
+    }
+
+    // Getter và Setter cho cartId
+    public int getCartId() {
+        return cartId;
+    }
+
+    public void setCartId(int cartId) {
+        this.cartId = cartId;
+    }
+
+    // Getter và Setter cho userId
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     // Thêm sản phẩm vào giỏ hàng hoặc tăng số lượng nếu đã tồn tại
@@ -22,17 +42,17 @@ public class Cart {
         }
     }
 
-    // Xóa sản phẩm khỏi giỏ hàng
-    public void removeItem(int productId) {
-        items.remove(productId);
-    }
-
     // Cập nhật số lượng của một sản phẩm
     public void updateQuantity(int productId, int quantity) {
         if (items.containsKey(productId)) {
             CartItem item = items.get(productId);
             item.setQuantity(quantity);
         }
+    }
+
+    // Xóa sản phẩm khỏi giỏ hàng
+    public void removeItem(int productId) {
+        items.remove(productId);
     }
 
     // Tính tổng giá trị của giỏ hàng sau khi áp dụng giảm giá
@@ -50,14 +70,5 @@ public class Cart {
     // Thiết lập các mục trong giỏ hàng từ một Map
     public void setItems(Map<Integer, CartItem> items) {
         this.items = items;
-    }
-
-    // Getter và Setter cho userId
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 }

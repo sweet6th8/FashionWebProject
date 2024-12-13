@@ -28,39 +28,34 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach var="cartItem" items="${cart.items}">
+
+
+                        <c:forEach var="cartItem" items="${cart.items.values()}">
+                            <pre>${cartItem}</pre>
+
                             <tr>
                                 <td>
                                     <figure class="itemside align-items-center">
-                                        <div class="aside"><img src="<c:out value='${cartItem.product.imageUrl}'/>" class="img-sm"></div>
+<%--                                        <div class="aside"><img src="<c:out value='${cartItem.product.photo}'/>" class="img-sm"></div>--%>
                                         <figcaption class="info">
                                             <a href="#" class="title text-dark"><c:out value='${cartItem.product.name}'/></a>
-                                            <p class="text-muted small"><c:out value='${cartItem.product.details}'/></p>
                                         </figcaption>
                                     </figure>
                                 </td>
                                 <td>
-                                    <div class="col">
-                                        <div class="input-group input-spinner">
-                                            <div class="input-group-prepend">
-                                                <button class="btn btn-light" type="button"> <i class="fa fa-minus"></i> </button>
-                                            </div>
-                                            <input type="number" class="form-control" value="<c:out value='${cartItem.quantity}'/>" min="1">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-light" type="button"> <i class="fa fa-plus"></i> </button>
-                                            </div>
-                                        </div>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" value="<c:out value='${cartItem.product.quantity}'/>" min="1">
                                     </div>
                                 </td>
                                 <td>
                                     <div class="price-wrap">
-                                        <var class="price"><c:out value='${cartItem.product.price}'/></var>
-                                        <small class="text-muted"> each </small>
+                                        <var class="price"><c:out value='${cartItem.getTotalPrice}'/></var>
+                                        <small class="text-muted"> ${cartItem.product.price} each </small>
                                     </div>
                                 </td>
                                 <td class="text-right">
                                     <form action="removeFromCart" method="POST">
-                                        <input type="hidden" name="cartItemId" value="<c:out value='${cartItem.product.id}'/>">
+                                        <input type="hidden" name="productId" value="<c:out value='${cartItem.product.id}'/>">
                                         <button type="submit" class="btn btn-danger"> Remove</button>
                                     </form>
                                 </td>

@@ -87,6 +87,7 @@
                                  <span class="text">Add to cart</span>
                                  <i class="fas fa-shopping-cart"></i>
                              </button>
+                             <a href="secure/saved?id=${singleProduct.getId()}"> <i class="fas fa-heart"></i></a>
                          </form>
                      </article> <!-- product-info-aside .// -->
                  </main> <!-- col.// -->
