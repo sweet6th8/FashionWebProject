@@ -148,7 +148,7 @@
       </div>
       <!-- card .// -->
       <p class="text-center mt-4">
-        Have an account? <a href="login">Log In</a>
+        Have an account? <a href="${pageContext.request.contextPath}/templates/login.jsp">Log In</a>
       </p>
       <c:set var="message" value="${requestScope.IEmail}"/>
       <c:if test="${not empty message  }">

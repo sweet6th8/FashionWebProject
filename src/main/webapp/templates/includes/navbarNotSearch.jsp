@@ -18,7 +18,7 @@
                     <c:choose>
                         <c:when test="${user != null}">
 
-                            <div class="dropdown">
+                            <div class="dropdown" style="margin-left: auto; margin-right: auto;">
                                 <button class="dropdown-button user rounded-circle">${user.getUsername().toUpperCase().charAt(0)}</button>
                                 <div class="dropdown-menu">
                                     <a href="${pageContext.request.contextPath}/templates/edit.jsp">Edit profile</a>
@@ -32,8 +32,8 @@
                             <div class="widget-header">
                                 <small class="title text-muted">Welcome guest!</small>
                                 <div>
-                                    <a href="templates/login.jsp">Login</a> <span class="dark-transp"> | </span>
-                                    <a href="templates/register.jsp"> Register</a>
+                                    <a href="${pageContext.request.contextPath}/templates/login.jsp">Login</a> <span class="dark-transp"> | </span>
+                                    <a href="${pageContext.request.contextPath}/templates/register.jsp"> Register</a>
                                 </div>
                             </div>
                             <img style="height: 50px ; width: 50px ; border-radius: 60%; background-color: #1a56e9; margin: 0 20px;"

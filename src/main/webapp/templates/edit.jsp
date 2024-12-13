@@ -21,6 +21,9 @@
     <article class="card-body">
       <header class="mb-4"><h4 class="card-title">Edit profile</h4></header>
       <form action="eidt" method="POST">
+<div>
+  <input type="file" class="form-control border mb-3" id="customFile" />
+</div>
         <div class="form-row">
           <div class="col form-group">
             <label>First namne </label>

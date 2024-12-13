@@ -33,7 +33,7 @@
         </form>
       </div>
     </div>
-    <p class="text-center mt-4">Don'\'t have account? <a href="register.jsp">Sign up</a></p>
+    <p class="text-center mt-4">Don'\'t have account? <a href="${pageContext.request.contextPath}/templates/register.jsp">Sign up</a></p>
     <br><br>
   </section>
 <%@ include file="/templates/includes/footer.jsp" %>
