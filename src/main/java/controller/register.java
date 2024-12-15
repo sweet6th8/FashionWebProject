@@ -47,7 +47,7 @@ public class register extends HttpServlet {
             user.setFavoriteProducts(new ArrayList<Product>());
             user.setPassword(password);
             // call user dao
-            UserDAO userDAO = new UserDAO(connection);
+            UserDAO userDAO = new UserDAO();
             try {
                 if (userDAO.registerUsser(user)) {
                     resp.sendRedirect(req.getContextPath() + "/templates/login.jsp");

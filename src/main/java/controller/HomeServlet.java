@@ -16,6 +16,8 @@ import model.Product;
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 
 //Chức năng: Hiển thị trang chính của cửa hàng (home.jsp) với danh sách sản phẩm nổi bật.
@@ -27,7 +29,25 @@ public class HomeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         try (Connection connection = DBConnectionPool.getDataSource().getConnection()) { // Lấy connection từ pool
+            String lang = request.getParameter("lang");
+            Locale locale;
 
+            if (lang == null) {
+                locale = new Locale("en", "US");
+            }
+            else {
+                // Đặt locale dựa trên tham số
+                if ("vi".equals(lang)) {
+                    locale = new Locale("vi", "VN");
+                } else {
+                    locale = new Locale("en", "US");
+                }
+            }
+            ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
+
+            // Lưu các giá trị vào request attribute
+            request.setAttribute("welcome", bundle.getString("welcome"));
+            request.setAttribute("chooseLanguage", bundle.getString("chooseLanguage"));
             ProductDAO productDAO = new ProductDAO(connection);
             List<Product> productList = productDAO.getAllProducts();
             CategoryDAO categoryDAO = new CategoryDAO(connection);

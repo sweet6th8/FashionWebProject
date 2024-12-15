@@ -25,12 +25,12 @@ public class CartDAO {
         try (PreparedStatement stmtCart = connection.prepareStatement(queryCart);
              PreparedStatement stmtCartItems = connection.prepareStatement(queryCartItems)) {
 
-            stmtCart.setInt(1, userId);
+            stmtCart.setString(1, userId+"");
             ResultSet rsCart = stmtCart.executeQuery();
             if (rsCart.next()) {
                 cart = new Cart(rsCart.getInt("id"), userId);
 
-                stmtCartItems.setInt(1, cart.getCartId());
+                stmtCartItems.setString(1, userId+"");
                 ResultSet rsItems = stmtCartItems.executeQuery();
                 while (rsItems.next()) {
                     // Nạp từng CartItem vào cart

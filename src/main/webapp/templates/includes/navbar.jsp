@@ -8,10 +8,10 @@
         <div class="collapse navbar-collapse" id="navbarTop4">
             <ul class="navbar-nav mr-auto ml-1">
                 <li class="nav-item ">
-                    <a href="${pageContext.request.contextPath}/language?lang=vi" class="nav-link"> VN </a>
+                    <a href="${pageContext.request.contextPath}/?lang=vi" class="nav-link"> VN </a>
                 </li>
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/language?lang=en    " class="nav-link"> US </a>
+                    <a href="${pageContext.request.contextPath}/?lang=en    " class="nav-link"> US </a>
                 </li>
             </ul>
             <ul class="navbar-nav mr-1">
