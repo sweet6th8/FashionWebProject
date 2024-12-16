@@ -15,12 +15,12 @@
   </head>
 <body>
 <jsp:include page="includes/navbarNotSearch.jsp"/>
-<c:set var="user" value="${sessionScope.user}"/>
+<c:set var="user" value="${requestScope.user}"/>
 <section class="section-content container-fluid" style="margin-top: 100px">
   <div class="card mx-auto " style="max-width: 520px">
     <article class="card-body">
       <header class="mb-4"><h4 class="card-title">Edit profile</h4></header>
-      <form action="eidt" method="POST">
+      <form action="${pageContext.request.contextPath}/templates/edit.jsp" method="POST">
 <div>
   <input type="file" class="form-control border mb-3" id="customFile" />
 </div>
@@ -36,7 +36,9 @@
                     autofocus
                     required
             />
+
           </div>
+          <span style="color: red"> ${requestScope.message}</span>
           <div class="col form-group">
             <label>Last name</label>
             <input
@@ -96,13 +98,13 @@
         <div class="form-row">
           <div class="form-group col-md-6">
             <label>Country</label>
-            <input type="text" class="form-control" />
+            <input type="text" class="form-control" name="country" placeholder="${address[0]}"/>
           </div>
           <div class="form-group col-md-6">
             <label>City</label>
             <input list="inputState" class="form-control" />
             <datalist name="city" id="inputState">
-              <option name="city" selected value="${user.getAddress()}"></option>
+              <option name="city" selected value="${address[1]}"></option>
               <option name="city"  value="Long An"></option>
               <option name="city" value="Binh Dinh"></option>
               <option name="city" value="Quy Nhon"></option>

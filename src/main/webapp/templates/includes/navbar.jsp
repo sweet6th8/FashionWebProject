@@ -80,8 +80,8 @@
                             <div class="dropdown" >
                                 <button class="dropdown-button user rounded-circle">${user.getUsername().toUpperCase().charAt(0)}</button>
                                 <ul class="dropdown-menu "  style="left: -50px">
-                                   <li class="text-center border-bottom" > <a class="dropdown-item "  href="${pageContext.request.contextPath}/templates/edit.jsp">Edit profile</a></li>
-                                   <li class="text-center border-bottom"> <a class="dropdown-item "  href="${pageContext.request.contextPath}/secure/saved">Saved</a></li>
+                                   <li class="text-center border-bottom" > <a class="dropdown-item "  href="${pageContext.request.contextPath}/secure/user/edit?user_id=${user.getId()}">Edit profile</a></li>
+                                   <li class="text-center border-bottom"> <a class="dropdown-item "  href="${pageContext.request.contextPath}/secure/user/saved?id=${user.getId()}">Saved</a></li>
                                  <li class="text-center border-bottom">   <a class="dropdown-item "  href="${pageContext.request.contextPath}/secure/history">History</a></li>
                                     <li class="text-center border-bottom"> <a class="dropdown-item "  href="${pageContext.request.contextPath}/secure/logout">Log out</a></li>
                                 </ul>

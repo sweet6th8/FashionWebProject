@@ -91,7 +91,7 @@
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label>Country</label>
-                <input type="text" class="form-control" />
+                <input type="text" class="form-control"  name="country"/>
               </div>
               <div class="form-group col-md-6">
                 <label>City</label>

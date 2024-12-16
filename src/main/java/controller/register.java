@@ -30,6 +30,7 @@ public class register extends HttpServlet {
             String checkPassword = req.getParameter("CheckPassword");
             String city = req.getParameter("city");
             String phone = req.getParameter("phone");
+            String country = req.getParameter("country");
             if (!validation.isValidEmail(Email)) {
                 String message = "Invalid Email";
                 req.setAttribute("IEmail", message);
@@ -43,13 +44,13 @@ public class register extends HttpServlet {
             user.setId(1);
             user.setPhone(phone);
             user.setUsername(FirstName);
-            user.setAddress(city);
+            user.setAddress(city +","+country);
             user.setFavoriteProducts(new ArrayList<Product>());
             user.setPassword(password);
             // call user dao
             UserDAO userDAO = new UserDAO();
             try {
-                if (userDAO.registerUsser(user)) {
+                if (userDAO.registerUser(user)) {
                     resp.sendRedirect(req.getContextPath() + "/templates/login.jsp");
                     return;
                 }

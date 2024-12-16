@@ -1,18 +1,17 @@
 package controller;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-
-@WebServlet(urlPatterns = {"/secure/user/saved"})
-public class saved  extends HttpServlet {
+@WebServlet(urlPatterns = {"/admin/dashboard"})
+public class AdminHome extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int id = Integer.parseInt(req.getParameter("id"));
-        req.getRequestDispatcher("/templates/Saved.jsp").forward(req, resp);
+       resp.sendRedirect(req.getContextPath() + "/templates/admin/admin.jsp");
     }
 }

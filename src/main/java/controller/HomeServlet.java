@@ -10,6 +10,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import model.Category;
 import model.Product;
 
@@ -48,7 +49,7 @@ public class HomeServlet extends HttpServlet {
             // Lưu các giá trị vào request attribute
             request.setAttribute("welcome", bundle.getString("welcome"));
             request.setAttribute("chooseLanguage", bundle.getString("chooseLanguage"));
-            ProductDAO productDAO = new ProductDAO(connection);
+            ProductDAO productDAO = new ProductDAO();
             List<Product> productList = productDAO.getAllProducts();
             CategoryDAO categoryDAO = new CategoryDAO(connection);
             List<Category> categoryList = categoryDAO.getAllCategories();
@@ -58,9 +59,11 @@ public class HomeServlet extends HttpServlet {
             } else {
                 System.out.println("Number of products: " + productList.size());
             }
+            HttpSession session = request.getSession();
             ServletContext context = getServletContext();
             request.setAttribute("productList", productList);
             context.setAttribute("categoryList", categoryList);
+            session.setAttribute("role", "guest");
             request.getRequestDispatcher("/language").forward(request, response);
         } catch (Exception e) {
             throw new ServletException("Error connecting to the database", e);

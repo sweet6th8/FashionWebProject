@@ -27,7 +27,7 @@
 
                 </div>
                 <div id="ALL" class="tab-content">
-                    <c:forEach var="item" items="${applicationScope.products}">
+                    <c:forEach var="item" items="${requestScope.products}">
                         <div class="card mb-3" style="max-width: 100%; max-height: 400px; ">
                             <div class="row g-0">
                                 <div class="col-md-4">

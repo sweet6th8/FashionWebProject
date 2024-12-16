@@ -28,7 +28,7 @@ public class CategoryServlet extends HttpServlet {
             String categoryId = request.getParameter("id");
 
 
-            ProductDAO productDAO = new ProductDAO(connection);
+            ProductDAO productDAO = new ProductDAO();
             List<Product> products;
 
             // If a category ID is provided, fetch products for that category

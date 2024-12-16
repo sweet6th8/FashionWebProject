@@ -22,7 +22,7 @@ public class SearchServlet extends HttpServlet {
             resp.setContentType("text/html; charset=UTF-8");
             req.setCharacterEncoding("UTF-8");// tìm tên tiếng việt
             String txtSearch = req.getParameter("txt");
-            ProductDAO dao = new ProductDAO(connection);
+            ProductDAO dao = new ProductDAO();
             List<Product> products = dao.searchProductByName(txtSearch);
 
 

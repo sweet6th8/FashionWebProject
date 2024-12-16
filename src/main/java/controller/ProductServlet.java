@@ -27,7 +27,7 @@ public class ProductServlet extends HttpServlet {
 
             if (productId != null) {
                 // Lấy thông tin sản phẩm từ ProductDAO
-                ProductDAO productDAO = new ProductDAO(connection);
+                ProductDAO productDAO = new ProductDAO();
                 Product product = productDAO.getProductById(Integer.parseInt(productId));
 
                 // Kiểm tra nếu sản phẩm tồn tại

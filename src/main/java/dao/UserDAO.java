@@ -4,7 +4,35 @@ import java.sql.*;
 public class UserDAO {
     public UserDAO() {
     }
-    public boolean registerUsser(User user) throws SQLException {
+    public int editProfile(User user) {
+
+        return -1;
+    }
+    public User getUser(int id) {
+        String sql = "select * from ListUser where user_id=?";
+        try (Connection con = DBConnectionPool.getDataSource().getConnection();){
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, id+"");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                User user = new User();
+                user.setId(rs.getInt("user_id"));
+                user.setUsername(rs.getString("username"));
+                user.setPassword(rs.getString("password"));
+                user.setEmail(rs.getString("email"));
+                user.setFullName(rs.getString("fullName"));
+                user.setAddress(rs.getString("address"));
+                user.setPhone(rs.getString("phone"));
+                user.setGender(rs.getBoolean("gender"));
+                return user;
+            }
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public boolean registerUser(User user) throws SQLException {
         int gender = (user.isGender()) ? 1 : 0;
         String sql = "insert into ListUser  (username, password, email, fullName, address, phone,gender) " +
                 "VALUES (?,?,?,?,?,?,?)";
@@ -29,7 +57,6 @@ public class UserDAO {
     public User getLogin(String email, String password) throws SQLException {
         User user = new User();
         Connection connection = DBConnectionPool.getDataSource().getConnection();
-        Statement statement = connection.createStatement();
         PreparedStatement ps = connection.prepareStatement("select * from ListUser where email = ? and password = ?");
         ps.setString(1, email);
         ps.setString(2, password);

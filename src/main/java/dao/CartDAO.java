@@ -14,7 +14,7 @@ public class CartDAO {
     private ProductDAO productDAO;
     public CartDAO(Connection connection) {
         this.connection = connection;
-        this.productDAO = new ProductDAO(connection);
+        this.productDAO = new ProductDAO();
     }
 
     // Lấy giỏ hàng của người dùng theo userId

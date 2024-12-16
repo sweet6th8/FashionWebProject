@@ -24,7 +24,7 @@ public class FilterServlet extends HttpServlet {
             System.out.println("minPrice: " + minPrice);  // Debugging line
             System.out.println("maxPrice: " + maxPrice);  // Debugging line
 
-            ProductDAO dao = new ProductDAO(connection);
+            ProductDAO dao = new ProductDAO();
             List<Product> products = dao.filteringProductByPrice(Double.parseDouble(minPrice), Double.parseDouble(maxPrice));
             req.setAttribute("productList", products);
 

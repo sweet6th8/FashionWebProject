@@ -12,18 +12,18 @@ import java.util.List;
 
 public class ProductDAO {
 
-    private Connection connection;
+
 
     // Constructor chứa tham số Connection
-    public ProductDAO(Connection connection) {
-        this.connection = connection;
+    public ProductDAO() {
+
     }
 
     // Thêm sản phẩm
     public void addProduct(Product product) {
         String sql = "INSERT INTO products (name, description, photo, price, discount, category_id) VALUES (?, ?, ?, ?, ?, ?)";
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
-
+        try (Connection connection = DBConnectionPool.getDataSource().getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, product.getName());
             statement.setString(2, product.getDescription());
             statement.setString(3, product.getPhoto());
@@ -41,8 +41,8 @@ public class ProductDAO {
     public Product getProductById(int id) {
         Product product = null;
         String sql = "SELECT * FROM Product WHERE id = ?";
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
-
+        try (Connection connection = DBConnectionPool.getDataSource().getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -69,8 +69,10 @@ public class ProductDAO {
     public List<Product> getAllProducts() {
         List<Product> products = new ArrayList<>();
         String sql = "SELECT * FROM Product";
-        try (PreparedStatement statement = connection.prepareStatement(sql);
-             ResultSet resultSet = statement.executeQuery()) {
+        try (Connection connection = DBConnectionPool.getDataSource().getConnection()){
+
+                PreparedStatement statement = connection.prepareStatement(sql);
+             ResultSet resultSet = statement.executeQuery() ;
 
             while (resultSet.next()) {
                 Product product = new Product();
@@ -89,16 +91,15 @@ public class ProductDAO {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-        return products;
-    }
+        return products;}
 
-    // Cập nhật thông tin sản phẩm
+        // Cập nhật thông tin sản phẩm
     public void updateProduct(Product product) {
         String sql = "UPDATE products SET name = ?, description = ?, photo = ?, price = ?, discount = ?, category_id = ? WHERE id = ?";
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
-
+        try (Connection connection = DBConnectionPool.getDataSource().getConnection()) {
+                PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, product.getName());
             statement.setString(2, product.getDescription());
             statement.setString(3, product.getPhoto());
@@ -116,8 +117,8 @@ public class ProductDAO {
     // Xóa sản phẩm
     public void deleteProduct(int id) {
         String sql = "DELETE FROM products WHERE id = ?";
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
-
+        try (Connection connection = DBConnectionPool.getDataSource().getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, id);
             statement.executeUpdate();
 
@@ -130,8 +131,8 @@ public class ProductDAO {
     private Category getCategoryById(int categoryId) {
         Category category = null;
         String sql = "SELECT * FROM Category WHERE id = ?";
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
-
+        try (Connection connection = DBConnectionPool.getDataSource().getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, categoryId);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -153,8 +154,8 @@ public class ProductDAO {
         List<Product> productList = new ArrayList<>();
         String sql = "SELECT * FROM Product WHERE category_id = ?";
 
-        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-
+        try (Connection connection = DBConnectionPool.getDataSource().getConnection()) {
+            PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setInt(1, categoryId);
             ResultSet rs = pstmt.executeQuery();
 
@@ -177,8 +178,8 @@ public class ProductDAO {
     public List<Product> searchProductByName(String name) {
         List<Product> list = new ArrayList<>();
         String sql = "SELECT * FROM Product WHERE name like ?";
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
-
+        try (Connection connection = DBConnectionPool.getDataSource().getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, "%" + name + "%");
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
@@ -207,8 +208,8 @@ public class ProductDAO {
     public List<Product> filteringProductByPrice(double minPrice, double maxPrice) {
         List<Product> list = new ArrayList<>();
         String sql = "SELECT * FROM Product WHERE price BETWEEN ? AND ?";
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
-
+        try (Connection connection = DBConnectionPool.getDataSource().getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(sql);
             statement.setDouble(1, minPrice);
             statement.setDouble(2, maxPrice);
             ResultSet resultSet = statement.executeQuery();
