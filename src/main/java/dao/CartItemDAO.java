@@ -10,7 +10,7 @@ public class CartItemDAO {
     }
 
     public boolean addCartItem(int cartId, int productId, int quantity, double price) {
-        String query = "INSERT INTO CartItem (cart_id, product_id, quantity, price) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO cart_item (cart_id, product_id, quantity, price) VALUES (?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             // Kiểm tra các tham số đầu vào
             if (quantity <= 0) {

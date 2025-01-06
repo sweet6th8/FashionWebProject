@@ -11,16 +11,18 @@ public class User {
     private String address; // Địa chỉ
     private String phone; // Số điện thoại
     private boolean gender ;
+    private  String Img ;
     private ArrayList<Product> FavoriteProducts ;
 
     // Constructor
     public User() {}
 
     // Getter và Setter
+    public String getImg () {return this.Img;}
     public int getId() {
         return id;
     }
-
+public void setImg (String path) {this.Img = path;}
     public void setId(int id) {
         this.id = id;
     }

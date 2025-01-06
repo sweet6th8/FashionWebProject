@@ -16,23 +16,17 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet(urlPatterns = {"/user/history"})
+@WebServlet(urlPatterns = {"/secure/user/history"})
 public class history extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
-            String message = "You are not logged in";
-            req.setAttribute("message", message);
-            resp.sendRedirect(req.getContextPath() + "/templates/login.jsp");
+     int userID = (int) session.getAttribute("userId");
+        System.out.println(userID);
+        ProductDAO pd = new ProductDAO();
+        List<Product> products = pd.getAllProducts();
+        req.setAttribute("products", products);
+        req.getRequestDispatcher("/templates/historyProduct.jsp").include(req, resp);
 
-        } else {
-            ProductDAO pd = new ProductDAO();
-            List<Product> products = pd.getAllProducts();
-            req.setAttribute("products", products);
-            req.getRequestDispatcher("/templates/historyProduct.jsp").include(req, resp);
-
-        }
     }
 }

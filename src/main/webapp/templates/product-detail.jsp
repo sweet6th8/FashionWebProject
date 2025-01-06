@@ -12,7 +12,7 @@
 </head>
 <body>
 <!-- Navbar -->
- <%@ include file="includes/navbarNotSearch.jsp" %>
+ <%@ include file="includes/navbar.jsp" %>
 <c:set var="singleProduct" value="${requestScope.product}" />
  <section class="section-content padding-y bg mt-5">
      <div class="container">

@@ -43,13 +43,16 @@ public class login extends HttpServlet {
             HttpSession session = req.getSession();
             try {
                 User user = udao.getLogin(email, pass);
-                System.out.println(user);
-                int userId = user.getId();
-                session.setAttribute("userId", userId);
-                session.setAttribute("role", role);
-                session.setAttribute("user", user);
-                // fix here, tam thoi dung sendRedirect nen luu user trong session
-                resp.sendRedirect(req.getContextPath());
+                if (user == null) {
+                    req.setAttribute("message", message);
+                    req.getRequestDispatcher("/templates/login.jsp").forward(req, resp);
+                }
+                else {
+                    session.setAttribute("userId", user.getId());
+                    session.setAttribute("role", role);
+                    session.setAttribute("img", user.getImg());
+                    resp.sendRedirect(req.getContextPath());
+                }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }

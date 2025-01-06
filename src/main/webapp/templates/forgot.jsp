@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
@@ -9,24 +10,22 @@
     <jsp:include page="headerResource.jsp"/>
 </head>
 <body>
-<section class="section-conten padding-y" style="min-height:84vh">
+<section class="section-content padding-y" style="min-height:84vh">
 	<div class="card mx-auto" style="max-width: 380px; margin-top:100px;">
       <div class="card-body">
       <h4 class="card-title mb-4">Sign in</h4>
-      <form>
+      <form action="${pageContext.request.contextPath}/Mail" Method="POST">
           <div class="form-group">
-			 <input type="email" class="form-control" placeholder="Email Address" >
-          </div> <!-- form-group// -->
-          <div class="form-group">
-			<input type="text" class="form-control" placeholder="Code : XXX:XXX" >
-          </div> <!-- form-group// -->
+			 <input type="email" class="form-control" placeholder="Email Address" name="email" REQUIRED>
+          </div>
           <div class="form-group">
               <button type="submit" class="btn btn-primary btn-block"> Send Email  </button>
-          </div> <!-- form-group// -->
+          </div>
       </form>
-      </div> <!-- card-body.// -->
-    </div> <!-- card .// -->
-     <p class="text-center mt-4">Don'\'t have account? <a href="register.jsp">Sign up</a></p>
+      </div>
+    </div>
+
+     <p class="text-center mt-4">${requestScope.message}</p>
      <br><br>
 </section>
 <footer class="section-footer border-top padding-y">
@@ -37,6 +36,6 @@
 		<p>
 			<a href="#">Terms and conditions</a>
 		</p>
-	</div><!-- //container -->
+	</div>
 </footer>
 </body>

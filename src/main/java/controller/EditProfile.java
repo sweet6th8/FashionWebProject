@@ -8,6 +8,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
 import model.User;
 
 import java.io.IOException;
@@ -28,10 +29,7 @@ public class EditProfile extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String Fname = request.getParameter("FirstName");
         String Lname = request.getParameter("LastName");
-        if (!validation.validateName(Fname) || !validation.validateName(Lname)) {
-            request.setAttribute("message", "Please enter a valid first name or last name");
-            request.getRequestDispatcher("/templates/edit.jsp").forward(request, response);
-        }
+        System.out.println(Fname +" " + Lname);
         String email = request.getParameter("Email");
         String password = request.getParameter("password");
         boolean gender = Boolean.parseBoolean(request.getParameter("gender"));

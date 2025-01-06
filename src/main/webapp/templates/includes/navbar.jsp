@@ -34,7 +34,8 @@
                         <i class="fa fa-bars"></i> All category
                     </button>
                     <ul class="dropdown-menu" style="left: 0;">
-                        <li> <a class="dropdown-item border-bottom" href="${pageContext.request.contextPath}/category?id=all">All
+                        <li><a class="dropdown-item border-bottom"
+                               href="${pageContext.request.contextPath}/category?id=all">All
                             products</a></li>
                         <c:set var="categoryList" value="${applicationScope.categoryList}"/>
                         <c:if test="${categoryList != null}">
@@ -69,21 +70,36 @@
             </div>
             <div class="col-lg-3 col-sm-6 col-8 order-2 order-lg-3">
                 <div class="d-flex justify-content-end mb-3 mb-lg-0">
-                    <a href="${pageContext.request.contextPath}/secure/cart?userId=${sessionScope.user.getId()}" class="widget-header pl-3 mr-3">
+                    <a href="${pageContext.request.contextPath}/secure/cart?userId=${sessionScope.user.getId()}"
+                       class="widget-header pl-3 mr-3">
                         <div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></div>
                         <span class="badge badge-pill badge-danger notify">0</span>
                     </a>
-                    <c:set var="user" value="${sessionScope.user}"/>
+                    <c:set var="userId" value="${sessionScope.userId}"/>
+                    <c:set var="userImg" value="${sessionScope.img}"/>
                     <c:choose>
-                        <c:when test="${user != null}">
+                        <c:when test="${userId != null}">
 
-                            <div class="dropdown" >
-                                <button class="dropdown-button user rounded-circle">${user.getUsername().toUpperCase().charAt(0)}</button>
-                                <ul class="dropdown-menu "  style="left: -50px">
-                                   <li class="text-center border-bottom" > <a class="dropdown-item "  href="${pageContext.request.contextPath}/secure/user/edit?user_id=${user.getId()}">Edit profile</a></li>
-                                   <li class="text-center border-bottom"> <a class="dropdown-item "  href="${pageContext.request.contextPath}/secure/user/saved?id=${user.getId()}">Saved</a></li>
-                                 <li class="text-center border-bottom">   <a class="dropdown-item "  href="${pageContext.request.contextPath}/secure/history">History</a></li>
-                                    <li class="text-center border-bottom"> <a class="dropdown-item "  href="${pageContext.request.contextPath}/secure/logout">Log out</a></li>
+                            <div class="dropdown">
+                                <img style="height: 50px ;padding: 0; " class="dropdown-button rounded-circle"
+                                     src="${pageContext.request.contextPath}${userImg}" alt="avatar">
+                                <ul class="dropdown-menu">
+                                    <li class="text-center border-bottom"><a class="dropdown-item "
+                                                                             href="${pageContext.request.contextPath}/secure/user/edit?user_id=${userId}">Edit
+                                        profile</a></li>
+                                    <li class="text-center border-bottom"><a class="dropdown-item "
+                                                                             href="${pageContext.request.contextPath}/secure/user/saved?id=${userId}">Saved</a>
+                                    </li>
+                                    <li class="text-center border-bottom"><a class="dropdown-item "
+                                                                             href="${pageContext.request.contextPath}/secure/user/history">History</a>
+                                    </li>
+                                    <li class="text-center border-bottom"><a class="dropdown-item "
+                                                                             href="${pageContext.request.contextPath}/secure/user/logout">Log
+                                        out</a></li>
+                                    <li class="text-center border-bottom"><a class="dropdown-item "
+                                                                             href="${pageContext.request.contextPath}/secure/user/upload">Upload </a>
+                                    </li>
+
                                 </ul>
                             </div>
                         </c:when>
@@ -91,11 +107,12 @@
                             <div class="widget-header">
                                 <small class="title text-muted">Welcome guest!</small>
                                 <div>
-                                    <a href="${pageContext.request.contextPath}/templates/login.jsp">Login</a> <span class="dark-transp"> | </span>
+                                    <a href="${pageContext.request.contextPath}/templates/login.jsp">Login</a> <span
+                                        class="dark-transp"> | </span>
                                     <a href="${pageContext.request.contextPath}/templates/register.jsp"> Register</a>
                                 </div>
                             </div>
-                            <img style="height: 50px ; width: 50px ; border-radius: 60%; background-color: #1a56e9; margin: 0 20px;"
+                            <img style="height: 50px ; width: 50px ; border-radius: 60%; margin: 0 20px;"
                                  src="${pageContext.request.contextPath}/static/images/avatars/guest.png">
                         </c:otherwise>
                     </c:choose>

@@ -11,7 +11,7 @@
     <jsp:include page="headerResource.jsp"/>
 </head>
 <body>
-<%@ include file="/templates/includes/navbarNotSearch.jsp" %>
+<%@ include file="/templates/includes/navbar.jsp" %>
 <section class="section-content">
     <div class="container p-4">
         <div class="row mt-4">

@@ -20,21 +20,21 @@ public class CartDAO {
     // Lấy giỏ hàng của người dùng theo userId
     public Cart getCartByUserId(int userId) {
         Cart cart = null;
-        String queryCart = "SELECT * FROM Cart WHERE id = ?";
-        String queryCartItems = "SELECT * FROM CartItem WHERE id = ?";
+        String queryCart = "SELECT * FROM Cart WHERE cart_id = ?";
+        String queryCartItems = "SELECT * FROM cart_item WHERE cart_item_id = ?";
         try (PreparedStatement stmtCart = connection.prepareStatement(queryCart);
              PreparedStatement stmtCartItems = connection.prepareStatement(queryCartItems)) {
 
             stmtCart.setString(1, userId+"");
             ResultSet rsCart = stmtCart.executeQuery();
             if (rsCart.next()) {
-                cart = new Cart(rsCart.getInt("id"), userId);
+                cart = new Cart(rsCart.getInt(1), userId);
 
                 stmtCartItems.setString(1, userId+"");
                 ResultSet rsItems = stmtCartItems.executeQuery();
                 while (rsItems.next()) {
                     // Nạp từng CartItem vào cart
-                    Product product = productDAO.getProductById(rsItems.getInt("id"));
+                    Product product = productDAO.getProductById(rsItems.getInt("product_id"));
                     CartItem cartItem = new CartItem(product, rsItems.getInt("quantity"));
                     cart.addItem(product, cartItem.getQuantity());
                 }

@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.sql.Connection;
 
 
-@WebServlet("/cart")
+@WebServlet("/secure/cart")
 public class CartServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

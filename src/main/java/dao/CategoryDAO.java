@@ -7,10 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryDAO {
-    private Connection connection;
+    public CategoryDAO() {
 
-    public CategoryDAO(Connection connection) {
-        this.connection = connection;
     }
     public List<Category> getAllCategories() {
         List<Category> categoriesList = new ArrayList<>();

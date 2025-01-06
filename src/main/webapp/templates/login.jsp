@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/reset.css">
 </head>
 <body>
-<%@ include file="/templates/includes/navbarNotSearch.jsp" %>
+<%@ include file="/templates/includes/navbar.jsp" %>
   <section class="section-conten padding-y" style="min-height:84vh">
     <div class="card mx-auto" style="max-width: 380px; margin-top:100px;">
       <div class="card-body">
@@ -22,13 +22,13 @@
             <input type="password" class="form-control" placeholder="Password" name="password">
           </div>
           <div class="form-group">
-            <a href="forgetPassword.jsp" class="float-right">Forgot password?</a>
+            <a href="forgot.jsp" class="float-right">Forgot password?</a>
           </div>
           <div class="form-group">
             <button type="submit" class="btn btn-primary btn-block"> Login </button>
           </div>
           <c:if test="${ not  empty requestScope.message}">
-            <p style="color: red;">${requestScope.message} !</p>
+            <p style="color: red;" class="text-center">${requestScope.message} !</p>
           </c:if>
         </form>
       </div>

@@ -99,3 +99,9 @@ INSERT INTO Product (name, description, photo, price, discount, category_id) VAL
 ('Kids'' Sneakers', 'Comfortable sneakers for active children.', '/static/images/products/kids_sneakers.jpg', 39.99, 6.00, 3);
 	
 
+	USE ClothingShopWeb
+	ALTER TABLE ListUser 
+	add img nvarchar(255)
+
+	update ListUser 
+	set img = '/static/images/avatars/guest.png'

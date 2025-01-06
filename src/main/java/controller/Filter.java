@@ -20,13 +20,8 @@ public class Filter implements jakarta.servlet.Filter {
         HttpServletResponse res = (HttpServletResponse) response;
         HttpSession session = req.getSession();
         String role = (String) session.getAttribute("role");
-        if (role == null) {
-            res.sendRedirect(req.getContextPath() + "/templates/login.jsp");
-        }
-        if (!role.equals("guest")) {
-            chain.doFilter(request, response);
+        if (role.equals("guest"))  res.sendRedirect(req.getContextPath() + "/templates/login.jsp");
+        else  chain.doFilter(request, response);
 
-        }
-        res.sendRedirect(req.getContextPath() + "/templates/login.jsp");
     }
 }

@@ -18,9 +18,9 @@ public class UserFilter implements jakarta.servlet.Filter {
         HttpSession session = request.getSession();
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         String role = session.getAttribute("role").toString();
-        if (role.equals("admin")) {
-            request.getRequestDispatcher("/template/login.jsp").forward(request, response);
+        if (role.equals("user")) {
+            filterChain.doFilter(request, response);
         }
-        else filterChain.doFilter(request, response);
+        else request.getRequestDispatcher("/template/login.jsp").forward(request, response);
     }
 }

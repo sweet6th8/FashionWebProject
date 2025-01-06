@@ -67,7 +67,7 @@ public class AddToCartServlet extends HttpServlet {
             cart.addItem(product, quantity);
             cartItemDAO.addCartItem(cart.getCartId() , productId, quantity, product.getPrice()); // Truyền cart.getId()
 
-            response.sendRedirect("cart");
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
             throw new ServletException("Error connecting to the database", e);

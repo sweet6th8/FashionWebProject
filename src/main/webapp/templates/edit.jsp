@@ -14,7 +14,7 @@
     <%@include file="headerResource.jsp"%>
   </head>
 <body>
-<jsp:include page="includes/navbarNotSearch.jsp"/>
+<jsp:include page="includes/navbar.jsp"/>
 <c:set var="user" value="${requestScope.user}"/>
 <section class="section-content container-fluid" style="margin-top: 100px">
   <div class="card mx-auto " style="max-width: 520px">
